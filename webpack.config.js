@@ -1,76 +1,76 @@
-const { CleanWebpackPlugin } = require( "clean-webpack-plugin" );
-const HTMLWebpackPlugin = require( "html-webpack-plugin" );
-const path = require( "path" );
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
-module.exports = ( env, argv ) => {
-	const isDevelopment = argv.mode === "development";
+module.exports = (env, argv) => {
+	const isDevelopment = argv.mode === 'development';
 
 	return {
-		entry: ["@babel/polyfill", "./src/index.js"],
+		entry: ['@babel/polyfill', './src/index.js'],
 		output: {
-			path: path.resolve( __dirname, "dist" ),
-			filename: "bundle.[contenthash].js"
+			path: path.resolve(__dirname, 'dist'),
+			filename: 'bundle.[contenthash].js'
 		},
 		devServer: {
 			port: 3000
 		},
 		resolve: {
 			extensions: [
-				"*",
-				".js",
-				".jsx",
-				".json",
-				".css",
-				".scss",
-				".png",
-				".jpg"
+				'*',
+				'.js',
+				'.jsx',
+				'.json',
+				'.css',
+				'.scss',
+				'.png',
+				'.jpg'
 			]
 		},
 		plugins: [
 			new HTMLWebpackPlugin({
-				template: path.join( __dirname, "src", "index.html" )
+				template: path.join(__dirname, 'src', 'index.html')
 			}),
-			new CleanWebpackPlugin(),
+			new CleanWebpackPlugin()
 		],
 		module: {
 			rules: [
 				{
 					test: /\.module.(sa|sc|c)ss$/i,
 					use: [
-						"style-loader",
+						'style-loader',
 						{
-							loader: "css-loader",
+							loader: 'css-loader',
 							options: {
 								modules: {
-									localIdentName: isDevelopment ? "[local]_[sha1:hash:hex:7]" : "[sha1:hash:hex:7]"
+									localIdentName: isDevelopment ? '[local]_[sha1:hash:hex:7]' : '[sha1:hash:hex:7]'
 								}
 							}
 						},
-						"postcss-loader",
-						"sass-loader"
+						'postcss-loader',
+						'sass-loader'
 					]
 				},
 				{
 					test: /^((?!\.module).)*(sa|sc|c)ss$/i,
 					use: [
-						"style-loader",
-						"css-loader",
-						"postcss-loader",
-						"sass-loader"
+						'style-loader',
+						'css-loader',
+						'postcss-loader',
+						'sass-loader'
 					]
 				},
 				{
 					test: /\.(js|jsx)$/i,
 					exclude: /node_modules/,
-					use: ["babel-loader"]
+					use: ['babel-loader']
 				},
 				{
 					test: /\.(png|jpeg|jpg|svg|gif)/i,
-					type: "asset/resource"
+					type: 'asset/resource'
 				},
 				{
 					test: /\.(ttf|otf|eot|woff|woff2)/i,
-					type: "asset/resource"
+					type: 'asset/resource'
 				}
 			]
 		}
