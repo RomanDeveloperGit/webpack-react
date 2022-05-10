@@ -12,7 +12,8 @@ module.exports = (env, argv) => {
 			filename: 'bundle.[contenthash].js'
 		},
 		devServer: {
-			port: 3000
+			port: 3000,
+			historyApiFallback: true
 		},
 		resolve: {
 			extensions: [
