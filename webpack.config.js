@@ -16,6 +16,7 @@ module.exports = (env, argv) => {
 			port: 3000,
 			historyApiFallback: true
 		},
+		devtool: "source-map",
 		resolve: {
 			extensions: [
 				'*',
